@@ -1,0 +1,59 @@
+apiVersion: skaffold/v4beta3
+kind: Config
+manifests:
+    rawYaml:
+        - ./infra/k8s/*
+build:
+    local:
+        push: false
+    artifacts:
+        - image: itskartik/auth
+          context: auth
+          docker:
+              dockerfile: Dockerfile
+          sync:
+              manual:
+                  - src: "src/**/*.ts"
+                    dest: .
+        - image: itskartik/client
+          context: client
+          docker:
+              dockerfile: Dockerfile
+          sync:
+              manual:
+                  - src: "**/*.jsx"
+                    dest: .
+                  - src: "**/*.js"
+                    dest: .
+        - image: itskartik/tickets
+          context: tickets
+          docker:
+              dockerfile: Dockerfile
+          sync:
+              manual:
+                  - src: "src/**/*.ts"
+                    dest: .
+        - image: itskartik/orders
+          context: orders
+          docker:
+              dockerfile: Dockerfile
+          sync:
+              manual:
+                  - src: "src/**/*.ts"
+                    dest: .
+        - image: itskartik/expiration
+          context: expiration
+          docker:
+              dockerfile: Dockerfile
+          sync:
+              manual:
+                  - src: "src/**/*.ts"
+                    dest: .
+        - image: itskartik/payments
+          context: payments
+          docker:
+              dockerfile: Dockerfile
+          sync:
+              manual:
+                  - src: "src/**/*.ts"
+                    dest: .
