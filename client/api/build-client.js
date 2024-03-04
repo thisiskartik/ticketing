@@ -3,7 +3,7 @@ import axios from "axios";
 const buildClient = ({ req }) => {
 	if (typeof window === "undefined") {
 		return axios.create({
-			baseURL: "http://kartik-arora.com",
+			baseURL: "http://kartik-arora.com/",
 			headers: req.headers,
 		});
 	} else {
